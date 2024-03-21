@@ -146,7 +146,7 @@ let Assign = [
 ]
 
 export const addTask = (data) => async dispatch => {
-  await axios.post(`http://localhost:4000/addTask`, data)
+  await axios.post(`https://cleverpush-coding-challenge-api.vercel.app/addTask`, data)
     .then(response => {
       alert("Successfully Added the record")
       console.log(response)
@@ -154,7 +154,7 @@ export const addTask = (data) => async dispatch => {
 
 };
 export const editTask = (data) => async dispatch => {
-  await axios.post(`http://localhost:4000/editTask`, data)
+  await axios.post(`https://cleverpush-coding-challenge-api.vercel.app/editTask`, data)
     .then(response => {
       alert("Successfully Edited the record")
       console.log(response)
@@ -162,7 +162,7 @@ export const editTask = (data) => async dispatch => {
 
 };
 export const deleteTask = (id) => async dispatch => {
-  await axios.delete(`http://localhost:4000/deleteTask/Test/${id}`)
+  await axios.delete(`https://cleverpush-coding-challenge-api.vercel.app/deleteTask/Test/${id}`)
     .then(response => {
       alert("Successfully Deleted the record")
       console.log(response)

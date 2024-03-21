@@ -5,7 +5,7 @@ import { AddTaskThroughSocket, DeleteTaskThroughSocket, EditTaskThroughSocket } 
 
 function SocketIoInitialization(props) {
     const dispatch = useDispatch();
-    const socket = SocketIo(`http://localhost:4000`, { transports: ["websocket", "polling"] });
+    const socket = SocketIo(`https://cleverpush-coding-challenge-api.vercel.app`, { transports: ["websocket", "polling"] });
     let tipID = props.tipID;
     if (tipID) {
         socket.auth = { tipID };
