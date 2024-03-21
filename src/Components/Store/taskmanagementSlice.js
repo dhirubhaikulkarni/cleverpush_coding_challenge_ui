@@ -146,26 +146,23 @@ let Assign = [
 ]
 
 export const addTask = (data) => async dispatch => {
-  await axios.post(`https://cleverpush-coding-challenge-api.vercel.app/addTask`, data)
+  await axios.post(`http://localhost:4000/addTask`, data)
     .then(response => {
       alert("Successfully Added the record")
-      console.log(response)
     })
 
 };
 export const editTask = (data) => async dispatch => {
-  await axios.post(`https://cleverpush-coding-challenge-api.vercel.app/editTask`, data)
+  await axios.post(`http://localhost:4000/editTask`, data)
     .then(response => {
       alert("Successfully Edited the record")
-      console.log(response)
     })
 
 };
 export const deleteTask = (id) => async dispatch => {
-  await axios.delete(`https://cleverpush-coding-challenge-api.vercel.app/deleteTask/Test/${id}`)
+  await axios.delete(`http://localhost:4000/deleteTask/Test/${id}`)
     .then(response => {
       alert("Successfully Deleted the record")
-      console.log(response)
     })
 
 };
@@ -197,7 +194,7 @@ const taskmanagementSlice = createSlice({
   initialState,
   reducers: {
     addTaskThroughSocket: (state, action) => {
-      debugger;
+      
       let filteredData = state.data.filter(x => x.id === action.payload.data.id)
       if (filteredData.length === 0) {
         state.data.unshift(action.payload.data)
@@ -205,16 +202,15 @@ const taskmanagementSlice = createSlice({
 
     },
     editTaskThroughSocket: (state, action) => {
-      debugger;
+      
       let indexToReplace = state.data.findIndex(record => record.id === action.payload.data.id);
-      // If the record with the specified callId exists, replace it with the new data
       if (indexToReplace !== -1) {
         state.data[indexToReplace] = action.payload.data;
       }
 
     },
     deleteTaskThroughSocket: (state, action) => {
-      debugger;
+      
       let indexToRemove = state.data.findIndex(record => record.id == action.payload.data);
 				if (indexToRemove >= 0) {
 					state.data.splice(indexToRemove, 1)

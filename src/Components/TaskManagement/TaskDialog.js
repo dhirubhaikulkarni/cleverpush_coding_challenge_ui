@@ -48,7 +48,7 @@ const TaskDialog = forwardRef((props, ref) => {
     const formRef = useRef(null);
     useImperativeHandle(ref, () => ({
         handleClickOpen(Data) {
-            debugger;
+            
             setData(Data)
             setTaskData(Data)
             handleClickOpen1();
@@ -65,7 +65,7 @@ const TaskDialog = forwardRef((props, ref) => {
     }
     const [assignValue, setAssignValue] = React.useState('');
     const handleAssignChange = (event) => {
-        debugger;
+        
         setAssignValue(event.target.value)
     }
 
@@ -85,7 +85,7 @@ const TaskDialog = forwardRef((props, ref) => {
         }
     }
     function onSubmit(model) {
-        debugger;
+        
         let uniqueId = taskdata.id === undefined ? Date.now().toString(36) + Math.random().toString(36).substring(2) : taskdata.id;
         let PriorityType = priorityValue !== "" ? Priority.filter(x => x.Priority === priorityValue)[0].PriorityType : ""
         let AssignName = assignValue !== "" ? Assign.filter(x => x.id === assignValue)[0].AssignName : ""
@@ -165,7 +165,6 @@ const TaskDialog = forwardRef((props, ref) => {
                                         type="text"
                                         variant="outlined"
                                         fullWidth
-                                        required
                                     />
                                 )}
                             />

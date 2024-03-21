@@ -11,7 +11,6 @@ function App() {
     <Provider store={rootReducers}>
       <SocketInitialisation tipID={"Test"}/>
       <BrowserRouter>
-
         <Navbar />
         <Routes>
           <Route path="/" element={<TaskManagement />} />

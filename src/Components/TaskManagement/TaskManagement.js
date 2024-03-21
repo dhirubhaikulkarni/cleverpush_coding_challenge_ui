@@ -37,7 +37,7 @@ const statusIcons = {
 
 
 export default function TaskManagement1() {
-  debugger;
+  
   const taskRef = useRef();
   const Data = useSelector((state) => state.task.data);
   const Status = useSelector((state) => state.task.status);
@@ -75,7 +75,6 @@ export default function TaskManagement1() {
   };
 
   const onDrop = (event, status) => {
-    debugger;
     const id = event.dataTransfer.getData('id');
     moveTask(parseInt(id), status);
   };
@@ -85,16 +84,16 @@ export default function TaskManagement1() {
   };
 
   const deleteRecord = (id) => {
-    debugger;
     setOpen(true);
     setRemoveID(id)
 
   };
 
   const handleClose = (newValue) => {
-    debugger;
     setOpen(false);
-    dispatch(deleteTask(removeID))
+    if (newValue) {
+      dispatch(deleteTask(removeID))
+    }
   };
 
 
@@ -110,7 +109,7 @@ export default function TaskManagement1() {
           Add Task
         </Button>
       </div>
-      
+
       <Grid container spacing={1}>
         {Status.map((x) => (
           <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={x.id}>
