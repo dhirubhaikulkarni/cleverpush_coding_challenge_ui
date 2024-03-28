@@ -159,6 +159,24 @@ export const editTask = (data) => async dispatch => {
     })
 
 };
+export const updateTaskDragAndDrop = (data) => async dispatch => {
+  
+  await axios.post(`http://localhost:4000/updateTaskDragAndDrop`, data)
+    .then(response => {
+    })
+
+};
+
+
+export const getStatus = () => async dispatch => {
+  await axios.get(`http://localhost:4000/getStatus`)
+    .then(response => {
+      dispatch(setStatus(response.data))
+    })
+
+};
+
+
 export const deleteTask = (id) => async dispatch => {
   await axios.delete(`http://localhost:4000/deleteTask/Test/${id}`)
     .then(response => {
@@ -181,9 +199,15 @@ export const DeleteTaskThroughSocket = (data) => async dispatch => {
 }
 
 
+export const EditDragAndDropTask = (data) => async dispatch => {
+  
+  dispatch(updateDragAndDropTask(data));
+}
+
+
 const initialState = {
   data: Data,
-  status: Status,
+  status: [],
   proprity: Priority,
   assign: Assign
 
@@ -218,13 +242,28 @@ const taskmanagementSlice = createSlice({
 				}
 
     },
+    setStatus: (state, action) => {
+      state.status = action.payload
+    },
+    
+    updateDragAndDropTask: (state, action) => {
+      let filterData = state.data.filter(record => record.id == action.payload.data.id)[0]
+      filterData.status = action.payload.data.status
+      let indexToReplace = state.data.findIndex(record => record.id === filterData.id);
+      if (indexToReplace !== -1) {
+        state.data[indexToReplace] = filterData;
+      }
+      
+    },
   }
 });
 
 export const {
   addTaskThroughSocket,
   editTaskThroughSocket,
-  deleteTaskThroughSocket
+  deleteTaskThroughSocket,
+  setStatus,
+  updateDragAndDropTask
 } = taskmanagementSlice.actions;
 
 export default taskmanagementSlice.reducer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SocketIo from 'socket.io-client';
-import { AddTaskThroughSocket, DeleteTaskThroughSocket, EditTaskThroughSocket } from '../Store/taskmanagementSlice';
+import { AddTaskThroughSocket, DeleteTaskThroughSocket, EditDragAndDropTask, EditTaskThroughSocket } from '../Store/taskmanagementSlice';
 
 function SocketIoInitialization(props) {
     const dispatch = useDispatch();
@@ -23,6 +23,11 @@ function SocketIoInitialization(props) {
     socket.on('EditTask', async data => {
         
         dispatch(EditTaskThroughSocket(data))
+    });
+    // Listen for drag and drop 'task' event
+    socket.on('editDarg', async data => {
+        
+        dispatch(EditDragAndDropTask(data))
     });
     // Listen for 'task' event
     socket.on('DeleteTask', async data => {

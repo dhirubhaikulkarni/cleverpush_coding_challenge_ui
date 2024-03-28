@@ -22,7 +22,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { deleteTask } from '../Store/taskmanagementSlice';
+import { deleteTask, getStatus, updateTaskDragAndDrop } from '../Store/taskmanagementSlice';
 import Snackbar from '@mui/material/Snackbar';
 
 
@@ -37,7 +37,7 @@ const statusIcons = {
 
 
 export default function TaskManagement1() {
-  
+
   const taskRef = useRef();
   const Data = useSelector((state) => state.task.data);
   const Status = useSelector((state) => state.task.status);
@@ -50,6 +50,11 @@ export default function TaskManagement1() {
     setTask(Data)
   }, [Data]);
 
+
+  useEffect(() => {
+    dispatch(getStatus())
+  },[]);
+
   const [state, setState] = React.useState({
     open: false,
     vertical: 'top',
@@ -58,12 +63,17 @@ export default function TaskManagement1() {
   const { vertical, horizontal, SnackBarOpen } = state;
 
   const moveTask = (id, status) => {
-    setTask(Task.map(task => {
-      if (task.id === id) {
-        return { ...task, status };
-      }
-      return task;
-    }));
+    let data = {
+      id,
+      status
+    }
+    dispatch(updateTaskDragAndDrop(data))
+    // setTask(Task.map(task => {
+    //   if (task.id === id) {
+    //     return { ...task, status };
+    //   }
+    //   return task;
+    // }));
   };
 
   const onDragStart = (event, id) => {
@@ -95,6 +105,8 @@ export default function TaskManagement1() {
       dispatch(deleteTask(removeID))
     }
   };
+
+
 
 
 
