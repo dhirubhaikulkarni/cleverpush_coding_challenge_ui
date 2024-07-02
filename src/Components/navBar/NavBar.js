@@ -80,6 +80,8 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  console.log("Test 123")
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
